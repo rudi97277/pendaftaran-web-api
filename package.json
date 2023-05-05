@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./index.js --exec babel-node"
+    "start": "nodemon ./index.js --exec babel-node",
+    "api-secret" : "node ./generate-key.js" 
   },
   "author": "Rudianto",
   "license": "ISC",

@@ -8,14 +8,10 @@ const User = mongoose.model('User', UserSchema);
 const Post = mongoose.model('Post', PostSchema);
 
 export const register = async (req,res) => {
+    req.body.password =  bcrypt.hashSync(req.body.password,8);
+    req.body.dateOfBirth =  new Date(req.body.dateOfBirth);
     try {
-        let newUser = new User({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            userName: req.body.userName,
-            password: bcrypt.hashSync(req.body.password,8),
-            dateOfBirth: new Date(req.body.dateOfBirth)
-        });
+        let newUser = new User(req.body);
         let user = await newUser.save();
         user.password = '**************';
         res.status(200).send(user);
@@ -73,7 +69,7 @@ export const getUsers = async (req,res) => {
     try {
         
         let users = await User.find();
-        res.send({data: users, userID: req.userId});
+        res.send({data: users});
     } catch (err) {
         res.send(err);
     }
