@@ -1,8 +1,12 @@
-import {addPost, commentPost, followUser, getPost, getUsers, reactPost, register, login} from "../controllers/crmController"
+import {addPost, commentPost, followUser, getPost, getUsers, reactPost, register, login, findUser} from "../controllers/crmController"
 import auth from "../middlewares/authJWT";
+require('express-group-routes');
 const routes = (app) => {
-    app.route('/user')
-    .get(auth, getUsers);
+    app.group("/user", (router) => {
+        router.use(auth)
+        router.get("", getUsers); 
+        router.get("/:userId", findUser); 
+    });
 
     app.route('/register')
     .post(register);
@@ -10,9 +14,6 @@ const routes = (app) => {
     app.route('/login')
     .post(login);
 
-
-    app.route('/user/:userId/follow')
-    .post(followUser);
 
     app.route('/post')
     .get(getPost)

@@ -7,6 +7,8 @@ import authJWT from "./src/middlewares/authJWT";
 require('dotenv').config();
 
 const app = express();
+
+
 const PORT = process.env.PORT;
 
 //mongoose connection

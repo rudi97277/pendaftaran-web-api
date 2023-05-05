@@ -75,6 +75,16 @@ export const getUsers = async (req,res) => {
     }
 }
 
+export const findUser = async (req,res) => {
+    try {
+        
+        let users = await User.findOne({_id : req.params.userId});
+        res.send({data: users});
+    } catch (err) {
+        res.send(err);
+    }
+}
+
 export const addPost = async (req, res) => {
     try {
         let newPost = new Post(req.body);
