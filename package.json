@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon ./index.js --exec babel-node",
-    "api-secret": "node ./generate-key.js"
+    "generate-secret": "node ./generate-secret.js"
   },
   "author": "Rudianto",
   "license": "ISC",
